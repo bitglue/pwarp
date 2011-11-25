@@ -1,6 +1,7 @@
 %token IDENTIFIER
 %token ROCKET
 %token CLASS
+%token CASE
 %token STRING_LITERAL
 %token DEFAULT
 %token VARIABLE
@@ -13,6 +14,9 @@
 %%
 
 input:
+    opt_statements_and_declarations
+
+opt_statements_and_declarations:
     /* empty */
     | statements_and_declarations
 
@@ -23,6 +27,7 @@ statements_and_declarations:
 statement_or_declaration:
     resource
     | assignment
+    | casestatement
 
 resource:
     IDENTIFIER '{' resourceinstances endsemi '}'
@@ -55,6 +60,24 @@ endsemi:
 
 assignment:
     VARIABLE '=' expr
+
+casestatement:
+    CASE expr '{' caseopts '}'
+
+caseopts:
+    caseopt
+    | caseopts caseopt
+
+caseopt:
+    casevalues ':' '{' opt_statements_and_declarations '}'
+
+casevalues:
+    caselvalue
+    | casevalues ',' caselvalue
+
+caselvalue:
+    expr
+    | DEFAULT
 
 %%
 
