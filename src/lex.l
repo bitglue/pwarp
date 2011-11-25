@@ -30,10 +30,13 @@ else            { return ELSE; }
 elsif           { return ELSIF; }
 default         { return DEFAULT; }
 define          { return DEFINE; }
+"->"            { return BEFORE; }
+"~>"            { return NOTIFY; }
 "=>"            { return ROCKET; }
-[{}=,():;?]     { return *yytext; }
+[{}=,():;?\]\[] { return *yytext; }
 "$"{alphanum}+  { return VARIABLE; }
-{alphanum}+     { return IDENTIFIER; }
+{lower}{alphanum}*      { return NAME; }
+{upper}{alphanum}*      { return RSCREF; }
 
 [ \t]*          {}
 [\n]            { yylineno++; }

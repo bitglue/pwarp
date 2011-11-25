@@ -1,4 +1,5 @@
-%token IDENTIFIER
+%token NAME
+%token RSCREF
 %token ROCKET
 %token CLASS
 %token CASE
@@ -9,6 +10,8 @@
 %token ELSE
 %token ELSIF
 %token DEFINE
+%token BEFORE
+%token NOTIFY
 
 %{
 #include <stdio.h>
@@ -35,9 +38,10 @@ statement_or_declaration:
     | ifstatement
     | definition
     | class
+    | chain
 
 resource:
-    IDENTIFIER '{' resourceinstances endsemi '}'
+    NAME '{' resourceinstances endsemi '}'
 
 resourceinstances:
     resourceinst
@@ -52,7 +56,7 @@ params:
     | params ',' param
 
 param:
-    IDENTIFIER ROCKET expr
+    NAME ROCKET expr
 
 expr:
     STRING_LITERAL
@@ -95,7 +99,7 @@ else:
     | ELSE '{' opt_statements_and_declarations '}'
 
 definition:
-    DEFINE IDENTIFIER argumentlist '{' opt_statements_and_declarations '}'
+    DEFINE NAME argumentlist '{' opt_statements_and_declarations '}'
 
 argumentlist:
     /* empty */
@@ -111,7 +115,21 @@ argument:
     | VARIABLE '=' expr
 
 class:
-    CLASS IDENTIFIER argumentlist '{' opt_statements_and_declarations '}'
+    CLASS NAME argumentlist '{' opt_statements_and_declarations '}'
+
+chain:
+    chain_node edge chain_node
+    | chain edge chain_node
+
+chain_node:
+    resourceref
+
+resourceref:
+    RSCREF '[' expr ']'
+
+edge:
+    BEFORE
+    | NOTIFY
 
 %%
 
