@@ -8,6 +8,7 @@
 %token IF
 %token ELSE
 %token ELSIF
+%token DEFINE
 
 %{
 #include <stdio.h>
@@ -32,6 +33,7 @@ statement_or_declaration:
     | assignment
     | casestatement
     | ifstatement
+    | definition
 
 resource:
     IDENTIFIER '{' resourceinstances endsemi '}'
@@ -90,6 +92,22 @@ else:
     /* empty */
     | ELSIF expr '{' opt_statements_and_declarations '}' else
     | ELSE '{' opt_statements_and_declarations '}'
+
+definition:
+    DEFINE IDENTIFIER argumentlist '{' opt_statements_and_declarations '}'
+
+argumentlist:
+    /* empty */
+    | '(' ')'
+    | '(' arguments endcomma ')'
+
+arguments:
+    argument
+    | arguments ',' argument
+
+argument:
+    VARIABLE
+    | VARIABLE '=' expr
 
 %%
 

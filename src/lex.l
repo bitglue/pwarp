@@ -29,6 +29,7 @@ if              { return IF; }
 else            { return ELSE; }
 elsif           { return ELSIF; }
 default         { return DEFAULT; }
+define          { return DEFINE; }
 "=>"            { return ROCKET; }
 [{}=,():;?]     { return *yytext; }
 "$"{alphanum}+  { return VARIABLE; }
