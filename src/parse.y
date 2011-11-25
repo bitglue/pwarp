@@ -34,6 +34,7 @@ statement_or_declaration:
     | casestatement
     | ifstatement
     | definition
+    | class
 
 resource:
     IDENTIFIER '{' resourceinstances endsemi '}'
@@ -108,6 +109,9 @@ arguments:
 argument:
     VARIABLE
     | VARIABLE '=' expr
+
+class:
+    CLASS IDENTIFIER argumentlist '{' opt_statements_and_declarations '}'
 
 %%
 
