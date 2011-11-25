@@ -1,0 +1,7 @@
+*.sw[nop]
+src/lex.c
+src/lex.o
+src/main
+src/main.o
+src/parse.h
+src/parse.o
