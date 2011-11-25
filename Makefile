@@ -1,11 +1,11 @@
 LEX=flex
 BISON=bison
 CCFLAGS=-Wall
+CC=gcc
 
 .PHONY: test
 
 test: src/main
-	pwd
 	test/all.sh src/main test/samples
 
 src/main: src/main.o src/parse.o src/lex.o

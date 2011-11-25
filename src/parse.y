@@ -3,7 +3,7 @@
 %token ROCKET
 %token CLASS
 %token CASE
-%token STRING_LITERAL
+%token STRING_LITERAL INT_LITERAL FLOAT_LITERAL
 %token DEFAULT
 %token VARIABLE
 %token IF
@@ -12,6 +12,15 @@
 %token DEFINE
 %token BEFORE
 %token NOTIFY
+%token TRUE FALSE AND OR
+%token IN EQ LTE GT GTE NE
+
+%left OR
+%left AND
+%left IN EQ '<' LTE '>' GTE NE
+%left '+' '-'
+%left '*' '/' '%'
+%left '!'
 
 %{
 #include <stdio.h>
@@ -58,8 +67,54 @@ params:
 param:
     NAME ROCKET expr
 
-expr:
+literal:
     STRING_LITERAL
+    | INT_LITERAL
+    | FLOAT_LITERAL
+    | VARIABLE
+    | TRUE
+    | FALSE
+
+expr:
+    literal
+    | array
+    | hash
+    | '(' expr ')'
+    | '-' expr
+    | expr '+' expr
+    | expr '-' expr
+    | expr '*' expr
+    | expr '/' expr
+    | expr '%' expr
+    | expr AND expr
+    | expr OR expr
+    | expr IN expr
+    | expr EQ expr
+    | expr '<' expr
+    | expr LTE expr
+    | expr '>' expr
+    | expr GTE expr
+    | expr NE expr
+    | '!' expr
+
+expressions:
+    expr
+    | expressions ',' expr
+
+array:
+    '[' expressions endcomma ']'
+    | '[' ']'
+
+hash:
+    '{' hashitems endcomma '}'
+    | '{' '}'
+
+hashitems:
+    hashitem
+    | hashitems ',' hashitem
+
+hashitem:
+    expr ROCKET expr
 
 endcomma:
     /* empty */

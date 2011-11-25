@@ -3,6 +3,7 @@
 %}
 
 digit [0-9]
+hexdigit [0-9a-fA-F]
 lower [a-z]
 upper [A-Z]
 letter [a-zA-Z]
@@ -23,6 +24,11 @@ int_const {digit}+
 <double_str>\"          { BEGIN(INITIAL); return STRING_LITERAL; }
 <double_str>[^\"]       {}
 
+true            { return TRUE; }
+false           { return FALSE; }
+and             { return AND; }
+or              { return OR; }
+in              { return IN; }
 class           { return CLASS; }
 case            { return CASE; }
 if              { return IF; }
@@ -30,11 +36,18 @@ else            { return ELSE; }
 elsif           { return ELSIF; }
 default         { return DEFAULT; }
 define          { return DEFINE; }
+"=="            { return EQ; }
+"!="            { return NE; }
+"<="            { return LTE; }
+">="            { return GTE; }
 "->"            { return BEFORE; }
 "~>"            { return NOTIFY; }
 "=>"            { return ROCKET; }
-[{}=,():;?\]\[] { return *yytext; }
-"$"{alphanum}+  { return VARIABLE; }
+[{}=,():;\]\[+-/*%<>!]  { return *yytext; }
+{digit}+                { return INT_LITERAL; }
+0x{hexdigit}+           { return INT_LITERAL; }
+{digit}+\.{digit}*      { return FLOAT_LITERAL; }
+"$"{alphanum}+          { return VARIABLE; }
 {lower}{alphanum}*      { return NAME; }
 {upper}{alphanum}*      { return RSCREF; }
 
