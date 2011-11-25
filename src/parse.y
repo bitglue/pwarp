@@ -3,6 +3,7 @@
 %token CLASS
 %token STRING_LITERAL
 %token DEFAULT
+%token VARIABLE
 
 %{
 #include <stdio.h>
@@ -21,6 +22,7 @@ statements_and_declarations:
 
 statement_or_declaration:
     resource
+    | assignment
 
 resource:
     IDENTIFIER '{' resourceinstances endsemi '}'
@@ -50,6 +52,9 @@ endcomma:
 endsemi:
     /* empty */
     | ';'
+
+assignment:
+    VARIABLE '=' expr
 
 %%
 

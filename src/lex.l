@@ -25,7 +25,8 @@ int_const {digit}+
 class           { return CLASS; }
 default         { return DEFAULT; }
 "=>"            { return ROCKET; }
-[{}=$,():;?]    { return *yytext; }
+[{}=,():;?]     { return *yytext; }
+"$"{alphanum}+  { return VARIABLE; }
 {alphanum}+     { return IDENTIFIER; }
 
 [ \t]*          {}
