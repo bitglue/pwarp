@@ -25,6 +25,9 @@ int_const {digit}+
 
 class           { return CLASS; }
 case            { return CASE; }
+if              { return IF; }
+else            { return ELSE; }
+elsif           { return ELSIF; }
 default         { return DEFAULT; }
 "=>"            { return ROCKET; }
 [{}=,():;?]     { return *yytext; }

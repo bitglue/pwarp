@@ -5,6 +5,9 @@
 %token STRING_LITERAL
 %token DEFAULT
 %token VARIABLE
+%token IF
+%token ELSE
+%token ELSIF
 
 %{
 #include <stdio.h>
@@ -28,6 +31,7 @@ statement_or_declaration:
     resource
     | assignment
     | casestatement
+    | ifstatement
 
 resource:
     IDENTIFIER '{' resourceinstances endsemi '}'
@@ -78,6 +82,14 @@ casevalues:
 caselvalue:
     expr
     | DEFAULT
+
+ifstatement:
+    IF expr '{' opt_statements_and_declarations '}' else
+
+else:
+    /* empty */
+    | ELSIF expr '{' opt_statements_and_declarations '}' else
+    | ELSE '{' opt_statements_and_declarations '}'
 
 %%
 
