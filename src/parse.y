@@ -21,6 +21,7 @@
 %left '+' '-'
 %left '*' '/' '%'
 %left '!'
+%left '['
 
 %{
 #include <stdio.h>
@@ -96,6 +97,7 @@ expr:
     | expr GTE expr
     | expr NE expr
     | '!' expr
+    | expr '[' expr ']'
 
 expressions:
     expr

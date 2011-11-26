@@ -13,6 +13,7 @@ $foo = {"key" => "val"}
 $foo = {1 => "one"}
 $foo = {1 => "one", 2 => "two"}
 $foo = {1 => "one", 2 => "two",}
+$foo = {1 => "one", 2 => "two",}[1]
 $foo = $bar
 $foo = 1 + 2
 $foo = 1 - 2
