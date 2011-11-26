@@ -1,6 +1,6 @@
 LEX=flex
 BISON=bison
-CCFLAGS=-Wall
+CFLAGS=-Wall
 CC=gcc
 
 .PHONY: test

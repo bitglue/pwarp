@@ -1,5 +1,9 @@
 %{
 #include "parse.h"
+
+extern int yyerror(char *s);
+
+#define YY_NO_INPUT
 %}
 
 digit [0-9]
@@ -11,6 +15,7 @@ alphanum [a-zA-Z0-9_]
 int_const {digit}+
 
 %option noyywrap
+%option nounput
 %x single_str
 %x double_str
 

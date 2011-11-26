@@ -26,6 +26,9 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+
+int yyerror(char *s);
+extern int yylex();
 %}
 
 %%
