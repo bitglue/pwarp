@@ -22,10 +22,12 @@ int_const {digit}+
 %%
 
 '                       { BEGIN(single_str); }
+<single_str>\\.         {}
 <single_str>'           { BEGIN(INITIAL); return STRING_LITERAL; }
 <single_str>[^\']       {}
 
 \"                      { BEGIN(double_str); }
+<double_str>\\.         {}
 <double_str>\"          { BEGIN(INITIAL); return STRING_LITERAL; }
 <double_str>[^\"]       {}
 
