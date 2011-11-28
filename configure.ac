@@ -12,6 +12,9 @@ AC_PROG_YACC
 AC_PROG_CC
 AC_PROG_LEX
 
+AM_PROG_CC_C_O
+PKG_CHECK_MODULES([CHECK], [check >= 0.9.4])
+
 # Checks for libraries.
 
 # Checks for header files.
