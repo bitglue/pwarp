@@ -25,3 +25,5 @@ config.log
 config.status
 config.h
 *~
+tests/check_tinin
+tests/check_tinin-check_tinin.o
