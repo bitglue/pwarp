@@ -16,6 +16,7 @@
   } \
   END_TEST
 
+/* Expressions */
 TEST_EXPR (test_literal_string,         "$foo = \"literal string\"")
 TEST_EXPR (test_literal_int,            "$foo = 1234")
 TEST_EXPR (test_literal_hex_int,        "$foo = 0xdead")
@@ -51,47 +52,85 @@ TEST_EXPR (test_gt,                     "$foo = 1 > 1")
 TEST_EXPR (test_gte,                    "$foo = 1 >= 1")
 TEST_EXPR (test_ne,                     "$foo = 1 != 1")
 
+/* Class definitions */
+TEST_EXPR (test_empty_class,            "class foo {}")
+TEST_EXPR (test_empty_param_class,      "class foo () {}")
+TEST_INV_EXPR (test_empty_param_comma_class, "class foo (,) {}")
+TEST_EXPR (test_class_statement,        "class foo { $statements = 'cool' }")
+TEST_EXPR (test_1param_class,           "class foo ($argument) {}")
+TEST_EXPR (test_default_param_class,    "class foo ($argument,$another='with default') {}")
+TEST_EXPR (test_param_trail_comma_class,"class foo ($many,$arguments,) {}")
+
+/* Resource declarations */
+TEST_EXPR (test_rsc_noparams,           "notify { '1': }")
+TEST_EXPR (test_rsc_param,              "notify { '2': message => 'fun times' }")
+TEST_EXPR (test_rsc_2param,             "notify { '3': name => '3', message => 'fun times' }")
+TEST_EXPR (test_rsc_2param_comma,       "notify { '4': name => '4', message => 'fun times', }")
+TEST_EXPR (test_rsc_2decls,             "notify { '5': message => 'fun times'; '6': message => 'more fun' }")
+TEST_EXPR (test_rsc_2decls_endsemi,     "notify { '7': message => 'fun times'; '8': message => 'more fun'; }")
+TEST_EXPR (test_rsc_2decl_empty,        "notify { '9':; '10':; }")
+
 Suite *
 parse_suite (void)
 {
   Suite *s = suite_create ("Parse");
 
-  TCase *tc_core = tcase_create ("Core");
-  tcase_add_test (tc_core, test_literal_string);
-  tcase_add_test (tc_core, test_literal_int);
-  tcase_add_test (tc_core, test_literal_hex_int);
-  tcase_add_test (tc_core, test_literal_float);
-  tcase_add_test (tc_core, test_literal_float_no_frac);
-  tcase_add_test (tc_core, test_neg);
-  tcase_add_test (tc_core, test_parens);
-  tcase_add_test (tc_core, test_empty_array);
-  tcase_add_test (tc_core, test_comma_array);
-  tcase_add_test (tc_core, test_array);
-  tcase_add_test (tc_core, test_array_trailing_comma);
-  tcase_add_test (tc_core, test_empty_hash);
-  tcase_add_test (tc_core, test_hash);
-  tcase_add_test (tc_core, test_comma_hash);
-  tcase_add_test (tc_core, test_hash_trail_comma);
-  tcase_add_test (tc_core, test_getitem);
-  tcase_add_test (tc_core, test_variable);
-  tcase_add_test (tc_core, test_add);
-  tcase_add_test (tc_core, test_sub);
-  tcase_add_test (tc_core, test_mul);
-  tcase_add_test (tc_core, test_div);
-  tcase_add_test (tc_core, test_mod);
-  tcase_add_test (tc_core, test_true);
-  tcase_add_test (tc_core, test_false);
-  tcase_add_test (tc_core, test_and);
-  tcase_add_test (tc_core, test_or);
-  tcase_add_test (tc_core, test_bang);
-  tcase_add_test (tc_core, test_in);
-  tcase_add_test (tc_core, test_eq);
-  tcase_add_test (tc_core, test_lt);
-  tcase_add_test (tc_core, test_lte);
-  tcase_add_test (tc_core, test_gt);
-  tcase_add_test (tc_core, test_gte);
-  tcase_add_test (tc_core, test_ne);
-  suite_add_tcase (s, tc_core);
+  TCase *tc = tcase_create ("Expression");
+  tcase_add_test (tc, test_literal_string);
+  tcase_add_test (tc, test_literal_int);
+  tcase_add_test (tc, test_literal_hex_int);
+  tcase_add_test (tc, test_literal_float);
+  tcase_add_test (tc, test_literal_float_no_frac);
+  tcase_add_test (tc, test_neg);
+  tcase_add_test (tc, test_parens);
+  tcase_add_test (tc, test_empty_array);
+  tcase_add_test (tc, test_comma_array);
+  tcase_add_test (tc, test_array);
+  tcase_add_test (tc, test_array_trailing_comma);
+  tcase_add_test (tc, test_empty_hash);
+  tcase_add_test (tc, test_hash);
+  tcase_add_test (tc, test_comma_hash);
+  tcase_add_test (tc, test_hash_trail_comma);
+  tcase_add_test (tc, test_getitem);
+  tcase_add_test (tc, test_variable);
+  tcase_add_test (tc, test_add);
+  tcase_add_test (tc, test_sub);
+  tcase_add_test (tc, test_mul);
+  tcase_add_test (tc, test_div);
+  tcase_add_test (tc, test_mod);
+  tcase_add_test (tc, test_true);
+  tcase_add_test (tc, test_false);
+  tcase_add_test (tc, test_and);
+  tcase_add_test (tc, test_or);
+  tcase_add_test (tc, test_bang);
+  tcase_add_test (tc, test_in);
+  tcase_add_test (tc, test_eq);
+  tcase_add_test (tc, test_lt);
+  tcase_add_test (tc, test_lte);
+  tcase_add_test (tc, test_gt);
+  tcase_add_test (tc, test_gte);
+  tcase_add_test (tc, test_ne);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Class");
+  tcase_add_test (tc, test_empty_class);
+  tcase_add_test (tc, test_empty_param_class);
+  tcase_add_test (tc, test_empty_param_comma_class);
+  tcase_add_test (tc, test_class_statement);
+  tcase_add_test (tc, test_1param_class);
+  tcase_add_test (tc, test_default_param_class);
+  tcase_add_test (tc, test_param_trail_comma_class);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Resource");
+  tcase_add_test (tc, test_rsc_noparams);
+  tcase_add_test (tc, test_rsc_param);
+  tcase_add_test (tc, test_rsc_2param);
+  tcase_add_test (tc, test_rsc_2param_comma);
+  tcase_add_test (tc, test_rsc_2decls);
+  tcase_add_test (tc, test_rsc_2decls_endsemi);
+  tcase_add_test (tc, test_rsc_2decl_empty);
+  suite_add_tcase (s, tc);
 
   return s;
 }
