@@ -64,10 +64,10 @@ resourceinstances:
 
 resourceinst:
     expr ':' params endcomma
+    | expr ':'
 
 params:
-    /* empty */
-    | param
+    param
     | params ',' param
 
 param:

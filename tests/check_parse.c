@@ -69,6 +69,7 @@ TEST_EXPR (test_rsc_2param_comma,       "notify { '4': name => '4', message => '
 TEST_EXPR (test_rsc_2decls,             "notify { '5': message => 'fun times'; '6': message => 'more fun' }")
 TEST_EXPR (test_rsc_2decls_endsemi,     "notify { '7': message => 'fun times'; '8': message => 'more fun'; }")
 TEST_EXPR (test_rsc_2decl_empty,        "notify { '9':; '10':; }")
+TEST_INV_EXPR (test_rsc_comma_params,   "notify { '11':, }")
 
 Suite *
 parse_suite (void)
@@ -130,6 +131,7 @@ parse_suite (void)
   tcase_add_test (tc, test_rsc_2decls);
   tcase_add_test (tc, test_rsc_2decls_endsemi);
   tcase_add_test (tc, test_rsc_2decl_empty);
+  tcase_add_test (tc, test_rsc_comma_params);
   suite_add_tcase (s, tc);
 
   return s;
