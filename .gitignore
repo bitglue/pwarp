@@ -1,10 +1,8 @@
 *.sw[nop]
+*.o
 src/lex.c
-src/lex.o
 src/tinin
-src/main.o
 src/parse.h
-src/parse.o
 src/parse.c
 src/libtinin.a
 .deps
@@ -27,5 +25,4 @@ config.status
 config.h
 *~
 tests/check_tinin
-tests/check_tinin-check_tinin.o
 tinin-*.tar.*z*

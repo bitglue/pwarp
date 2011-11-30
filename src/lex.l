@@ -1,5 +1,6 @@
 %{
 #include "parse.h"
+#include "lex.h"
 
 extern int yyerror(char *s);
 
@@ -62,3 +63,15 @@ define          { return DEFINE; }
 [\n]            { yylineno++; }
 
 .               { yyerror("lex hates you"); exit(1); }
+
+%%
+
+int
+parse_string (char *s)
+{
+  int result;
+  YY_BUFFER_STATE sbuf = yy_scan_string(s);
+  result = yyparse();
+  yy_delete_buffer(sbuf);
+  return result;
+}
