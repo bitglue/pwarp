@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int yyerror(char *s);
-extern int yylex();
+void yyerror(char *s);
+int yylex();
 %}
 
 %%
@@ -196,7 +196,7 @@ edge:
 extern char *yytext;
 extern int yylineno;
 
-int yyerror(char *s) {
+void
+yyerror(char *s) {
     fprintf(stderr, "ERROR: %s at symbol %s on line %i\n", s, yytext, yylineno);
-    exit(1);
 }
