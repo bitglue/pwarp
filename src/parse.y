@@ -23,6 +23,8 @@
 %left '!'
 %left '['
 
+%error-verbose
+
 %{
 #include <stdio.h>
 #include <stdlib.h>
