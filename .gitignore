@@ -6,6 +6,7 @@ src/main.o
 src/parse.h
 src/parse.o
 src/parse.c
+src/libtinin.a
 .deps
 autom4te.cache
 depcomp
