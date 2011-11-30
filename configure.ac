@@ -4,7 +4,7 @@
 AC_PREREQ([2.67])
 AC_INIT([tinin], [0.1], [indigo@bitglue.com])
 AM_INIT_AUTOMAKE([-Wall -Werror])
-AC_CONFIG_SRCDIR([src/parse.h])
+AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.

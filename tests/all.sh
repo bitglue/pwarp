@@ -1,5 +1,3 @@
-parser=$1
-
-for f in "samples/"*.pp; do
+for f in "$srcdir/samples/"*.pp; do
     "../src/tinin" < "$f" || exit $?
 done
