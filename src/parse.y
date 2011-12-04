@@ -90,6 +90,7 @@ expr:
     | hash
     | selector
     | funccall
+    | NAME /* bareword. should be deprecated. */
     | '(' expr ')'
     | '-' expr
     | expr '+' expr

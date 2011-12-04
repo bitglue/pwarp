@@ -65,6 +65,7 @@ TEST_EXPR (test_function,               "$foo = regsubst()")
 TEST_EXPR (test_function_arg,           "$foo = regsubst(1)")
 TEST_EXPR (test_function_args,          "$foo = regsubst(1,2)")
 TEST_EXPR (test_function_trail_comma,   "$foo = regsubst(1,2,)")
+TEST_EXPR (test_bareword,               "$foo = bareword") /* this construct should be deprecated */
 
 /* Class definitions */
 TEST_EXPR (test_empty_class,            "class foo {}")
@@ -159,6 +160,7 @@ parse_suite (void)
   tcase_add_test (tc, test_function_arg);
   tcase_add_test (tc, test_function_args);
   tcase_add_test (tc, test_function_trail_comma);
+  tcase_add_test (tc, test_bareword);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Node");
