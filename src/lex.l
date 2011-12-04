@@ -15,6 +15,7 @@ letter [a-zA-Z]
 alphanum [a-zA-Z0-9_]
 int_const {digit}+
 lowerword {lower}{alphanum}*
+operator [{}=,():;\]\[+-/*%<>!?@]
 
 %option noyywrap
 %option nounput
@@ -53,7 +54,7 @@ define          { return DEFINE; }
 "->"            { return BEFORE; }
 "~>"            { return NOTIFY; }
 "=>"            { return ROCKET; }
-[{}=,():;\]\[+-/*%<>!?] { return *yytext; }
+{operator}      { return *yytext; }
 {digit}+                { return INT_LITERAL; }
 0x{hexdigit}+           { return INT_LITERAL; }
 {digit}+\.{digit}*      { return FLOAT_LITERAL; }

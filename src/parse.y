@@ -59,6 +59,7 @@ statement_or_declaration:
 
 resource:
     NAME '{' resourceinstances endsemi '}'
+    | '@' NAME '{' resourceinstances endsemi '}'
 
 resourceinstances:
     resourceinst
