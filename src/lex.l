@@ -54,6 +54,8 @@ define          { return DEFINE; }
 "->"            { return BEFORE; }
 "~>"            { return NOTIFY; }
 "=>"            { return ROCKET; }
+"<|"            { return SPACESHIP_LEFT; }
+"|>"            { return SPACESHIP_RIGHT; }
 {operator}      { return *yytext; }
 {digit}+                { return INT_LITERAL; }
 0x{hexdigit}+           { return INT_LITERAL; }

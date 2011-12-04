@@ -87,6 +87,8 @@ TEST_EXPR (test_defaults_trail_comma,   "Foo { contrived => true, }")
 TEST_EXPR (test_chain_require,          "Foo['foo'] -> Bar['bar']")
 TEST_EXPR (test_chain_notify,           "Foo['foo'] ~> Bar['bar']")
 TEST_EXPR (test_chain_two,              "Foo['foo'] -> Bar['bar'] -> Baz['baz']")
+TEST_EXPR (test_collection,             "Fancyresource <| |>")
+TEST_EXPR (test_collection_chain,       "Fancyresource <| |> -> Waffles <||>")
 
 /* Node definitions */
 TEST_EXPR (test_node_empty,             "node 'foo' {}")
@@ -191,6 +193,8 @@ parse_suite (void)
   tcase_add_test (tc, test_chain_notify);
   tcase_add_test (tc, test_chain_two);
   tcase_add_test (tc, test_chain_notify);
+  tcase_add_test (tc, test_collection);
+  tcase_add_test (tc, test_collection_chain);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Resource");

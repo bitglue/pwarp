@@ -14,6 +14,7 @@
 %token NOTIFY
 %token TRUE FALSE AND OR
 %token IN EQ LTE GT GTE NE
+%token SPACESHIP_LEFT SPACESHIP_RIGHT
 
 %left OR
 %left AND
@@ -55,6 +56,7 @@ statement_or_declaration:
     | class
     | node
     | chain
+    | collection
     | default
 
 resource:
@@ -210,9 +212,13 @@ chain:
 
 chain_node:
     resourceref
+    | collection
 
 resourceref:
     RSCREF '[' expr ']'
+
+collection:
+    RSCREF SPACESHIP_LEFT SPACESHIP_RIGHT
 
 edge:
     BEFORE
