@@ -89,6 +89,10 @@ TEST_EXPR (test_chain_notify,           "Foo['foo'] ~> Bar['bar']")
 TEST_EXPR (test_chain_two,              "Foo['foo'] -> Bar['bar'] -> Baz['baz']")
 TEST_EXPR (test_collection,             "Fancyresource <| |>")
 TEST_EXPR (test_collection_chain,       "Fancyresource <| |> -> Waffles <||>")
+TEST_EXPR (test_collection_filter,      "Fancyresource <| fancy == 'very' |>")
+TEST_EXPR (test_collection_filter_ne,   "Fancyresource <| fancy != 'very' |>")
+TEST_EXPR (test_collection_filter_or,   "Fancyresource <| fancy == 'very' or expensive != true |>")
+TEST_EXPR (test_collection_filter_paren,"Fancyresource <| awesome == 'yes' and (fancy == 'very' or expensive != true) |>")
 
 /* Node definitions */
 TEST_EXPR (test_node_empty,             "node 'foo' {}")
@@ -195,6 +199,10 @@ parse_suite (void)
   tcase_add_test (tc, test_chain_notify);
   tcase_add_test (tc, test_collection);
   tcase_add_test (tc, test_collection_chain);
+  tcase_add_test (tc, test_collection_filter);
+  tcase_add_test (tc, test_collection_filter_ne);
+  tcase_add_test (tc, test_collection_filter_or);
+  tcase_add_test (tc, test_collection_filter_paren);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Resource");

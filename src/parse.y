@@ -218,7 +218,11 @@ resourceref:
     RSCREF '[' expr ']'
 
 collection:
-    RSCREF SPACESHIP_LEFT SPACESHIP_RIGHT
+    RSCREF SPACESHIP_LEFT collfilter SPACESHIP_RIGHT
+
+collfilter:
+    /* empty */
+    | expr
 
 edge:
     BEFORE
