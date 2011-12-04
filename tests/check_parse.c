@@ -38,6 +38,7 @@ TEST_EXPR (test_hash,                   "$foo = {1 => \"one\", 2 => \"two\"}")
 TEST_EXPR (test_hash_trail_comma,       "$foo = {1 => \"one\", 2 => \"two\",}")
 TEST_EXPR (test_getitem,                "$foo = {1 => \"one\", 2 => \"two\",}[1]")
 TEST_EXPR (test_variable,               "$foo = $bar")
+TEST_EXPR (test_qualified_variable,     "$foo = $bar::baz")
 TEST_EXPR (test_add,                    "$foo = 1 + 2")
 TEST_EXPR (test_sub,                    "$foo = 1 - 2")
 TEST_EXPR (test_mul,                    "$foo = 1 * 2")
@@ -131,6 +132,7 @@ parse_suite (void)
   tcase_add_test (tc, test_hash_trail_comma);
   tcase_add_test (tc, test_getitem);
   tcase_add_test (tc, test_variable);
+  tcase_add_test (tc, test_qualified_variable);
   tcase_add_test (tc, test_add);
   tcase_add_test (tc, test_sub);
   tcase_add_test (tc, test_mul);

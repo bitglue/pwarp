@@ -58,7 +58,7 @@ define          { return DEFINE; }
 {digit}+                { return INT_LITERAL; }
 0x{hexdigit}+           { return INT_LITERAL; }
 {digit}+\.{digit}*      { return FLOAT_LITERAL; }
-"$"{alphanum}+          { return VARIABLE; }
+"$"{alphanum}+(::{alphanum}+)*  { return VARIABLE; }
 {lowerword}(::{lowerword})*     { return NAME; }
 {upper}{alphanum}*      { return RSCREF; }
 
