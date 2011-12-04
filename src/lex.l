@@ -53,7 +53,7 @@ define          { return DEFINE; }
 "->"            { return BEFORE; }
 "~>"            { return NOTIFY; }
 "=>"            { return ROCKET; }
-[{}=,():;\]\[+-/*%<>!]  { return *yytext; }
+[{}=,():;\]\[+-/*%<>!?] { return *yytext; }
 {digit}+                { return INT_LITERAL; }
 0x{hexdigit}+           { return INT_LITERAL; }
 {digit}+\.{digit}*      { return FLOAT_LITERAL; }

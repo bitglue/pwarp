@@ -87,6 +87,7 @@ expr:
     literal
     | array
     | hash
+    | selector
     | '(' expr ')'
     | '-' expr
     | expr '+' expr
@@ -124,6 +125,18 @@ hashitems:
 
 hashitem:
     expr ROCKET expr
+
+selector:
+    expr '?' '{' '}'
+    | expr '?' '{' selectorparams endcomma '}'
+
+selectorparams:
+    selectorparam
+    | selectorparams ',' selectorparam
+
+selectorparam:
+    expr ROCKET expr
+    | DEFAULT ROCKET expr
 
 endcomma:
     /* empty */
