@@ -16,6 +16,10 @@
   } \
   END_TEST
 
+/* Comments */
+TEST_EXPR (test_empty_lines,           "\n\n")
+TEST_EXPR (test_comment_hash,           "# this is a comment!!!")
+
 /* Expressions */
 TEST_EXPR (test_literal_string,         "$foo = \"literal string\"")
 TEST_EXPR (test_literal_int,            "$foo = 1234")
@@ -82,7 +86,12 @@ parse_suite (void)
 {
   Suite *s = suite_create ("Parse");
 
-  TCase *tc = tcase_create ("Expression");
+  TCase *tc = tcase_create ("Comment");
+  tcase_add_test (tc, test_empty_lines);
+  tcase_add_test (tc, test_comment_hash);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Expression");
   tcase_add_test (tc, test_literal_string);
   tcase_add_test (tc, test_literal_int);
   tcase_add_test (tc, test_literal_hex_int);

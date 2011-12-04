@@ -60,7 +60,7 @@ define          { return DEFINE; }
 {lower}{alphanum}*      { return NAME; }
 {upper}{alphanum}*      { return RSCREF; }
 
-[ \t]*          {}
+[ \t]*|#[^\n]*  {}
 [\n]            { yylineno++; }
 
 .               { yyerror("lex hates you"); exit(1); }

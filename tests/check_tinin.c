@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <check.h>
+#include "suites.h"
 
 START_TEST(test_check)
 {
