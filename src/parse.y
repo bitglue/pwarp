@@ -59,6 +59,7 @@ statement_or_declaration:
     | chain
     | collection
     | default
+    | funccall
 
 resource:
     NAME '{' resourceinstances endsemi '}'
