@@ -65,6 +65,11 @@ TEST_EXPR (test_1param_class,           "class foo ($argument) {}")
 TEST_EXPR (test_default_param_class,    "class foo ($argument,$another='with default') {}")
 TEST_EXPR (test_param_trail_comma_class,"class foo ($many,$arguments,) {}")
 
+/* Chaining */
+TEST_EXPR (test_chain_require,          "Foo['foo'] -> Bar['bar']")
+TEST_EXPR (test_chain_notify,           "Foo['foo'] ~> Bar['bar']")
+TEST_EXPR (test_chain_two,              "Foo['foo'] -> Bar['bar'] -> Baz['baz']")
+
 /* Node definitions */
 TEST_EXPR (test_node_empty,             "node 'foo' {}")
 TEST_EXPR (test_node_statement,         "node 'foo' { class bar {} }")
@@ -141,6 +146,13 @@ parse_suite (void)
   tcase_add_test (tc, test_1param_class);
   tcase_add_test (tc, test_default_param_class);
   tcase_add_test (tc, test_param_trail_comma_class);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Chain");
+  tcase_add_test (tc, test_chain_require);
+  tcase_add_test (tc, test_chain_notify);
+  tcase_add_test (tc, test_chain_two);
+  tcase_add_test (tc, test_chain_notify);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Resource");
