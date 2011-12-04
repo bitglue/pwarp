@@ -61,6 +61,10 @@ TEST_EXPR (test_1param_class,           "class foo ($argument) {}")
 TEST_EXPR (test_default_param_class,    "class foo ($argument,$another='with default') {}")
 TEST_EXPR (test_param_trail_comma_class,"class foo ($many,$arguments,) {}")
 
+/* Node definitions */
+TEST_EXPR (test_node_empty,             "node 'foo' {}")
+TEST_EXPR (test_node_statement,         "node 'foo' { class bar {} }")
+
 /* Resource declarations */
 TEST_EXPR (test_rsc_noparams,           "notify { '1': }")
 TEST_EXPR (test_rsc_param,              "notify { '2': message => 'fun times' }")
@@ -113,6 +117,11 @@ parse_suite (void)
   tcase_add_test (tc, test_gt);
   tcase_add_test (tc, test_gte);
   tcase_add_test (tc, test_ne);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Node");
+  tcase_add_test (tc, test_node_empty);
+  tcase_add_test (tc, test_node_statement);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Class");

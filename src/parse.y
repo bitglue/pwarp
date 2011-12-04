@@ -1,7 +1,7 @@
 %token NAME
 %token RSCREF
 %token ROCKET
-%token CLASS
+%token CLASS NODE
 %token CASE
 %token STRING_LITERAL INT_LITERAL FLOAT_LITERAL
 %token DEFAULT
@@ -53,6 +53,7 @@ statement_or_declaration:
     | ifstatement
     | definition
     | class
+    | node
     | chain
 
 resource:
@@ -178,6 +179,9 @@ argument:
 
 class:
     CLASS NAME argumentlist '{' opt_statements_and_declarations '}'
+
+node:
+    NODE expr '{' opt_statements_and_declarations '}'
 
 chain:
     chain_node edge chain_node

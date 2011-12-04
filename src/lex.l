@@ -38,6 +38,7 @@ and             { return AND; }
 or              { return OR; }
 in              { return IN; }
 class           { return CLASS; }
+node            { return NODE; }
 case            { return CASE; }
 if              { return IF; }
 else            { return ELSE; }
