@@ -93,6 +93,10 @@ TEST_EXPR (test_collection_filter,      "Fancyresource <| fancy == 'very' |>")
 TEST_EXPR (test_collection_filter_ne,   "Fancyresource <| fancy != 'very' |>")
 TEST_EXPR (test_collection_filter_or,   "Fancyresource <| fancy == 'very' or expensive != true |>")
 TEST_EXPR (test_collection_filter_paren,"Fancyresource <| awesome == 'yes' and (fancy == 'very' or expensive != true) |>")
+TEST_EXPR (test_coll_empty_override,    "Fancyresource <| |> { }")
+TEST_EXPR (test_coll_override,          "Fancyresource <| |> { fancy => false }")
+TEST_EXPR (test_coll_override_comma,    "Fancyresource <| |> { fancy => false, }")
+TEST_EXPR (test_coll_override_two,      "Fancyresource <| |> { fancy => false, expensive => 'very' }")
 
 /* Node definitions */
 TEST_EXPR (test_node_empty,             "node 'foo' {}")
@@ -203,6 +207,10 @@ parse_suite (void)
   tcase_add_test (tc, test_collection_filter_ne);
   tcase_add_test (tc, test_collection_filter_or);
   tcase_add_test (tc, test_collection_filter_paren);
+  tcase_add_test (tc, test_coll_empty_override);
+  tcase_add_test (tc, test_coll_override);
+  tcase_add_test (tc, test_coll_override_comma);
+  tcase_add_test (tc, test_coll_override_two);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Resource");
