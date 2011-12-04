@@ -14,6 +14,7 @@ upper [A-Z]
 letter [a-zA-Z]
 alphanum [a-zA-Z0-9_]
 int_const {digit}+
+lowerword {lower}{alphanum}*
 
 %option noyywrap
 %option nounput
@@ -57,7 +58,7 @@ define          { return DEFINE; }
 0x{hexdigit}+           { return INT_LITERAL; }
 {digit}+\.{digit}*      { return FLOAT_LITERAL; }
 "$"{alphanum}+          { return VARIABLE; }
-{lower}{alphanum}*      { return NAME; }
+{lowerword}(::{lowerword})*     { return NAME; }
 {upper}{alphanum}*      { return RSCREF; }
 
 [ \t]*|#[^\n]*  {}

@@ -58,6 +58,7 @@ TEST_EXPR (test_ne,                     "$foo = 1 != 1")
 
 /* Class definitions */
 TEST_EXPR (test_empty_class,            "class foo {}")
+TEST_EXPR (test_namespace_class,        "class foo::bar {}")
 TEST_EXPR (test_empty_param_class,      "class foo () {}")
 TEST_INV_EXPR (test_empty_param_comma_class, "class foo (,) {}")
 TEST_EXPR (test_class_statement,        "class foo { $statements = 'cool' }")
@@ -140,6 +141,7 @@ parse_suite (void)
 
   tc = tcase_create ("Class");
   tcase_add_test (tc, test_empty_class);
+  tcase_add_test (tc, test_namespace_class);
   tcase_add_test (tc, test_empty_param_class);
   tcase_add_test (tc, test_empty_param_comma_class);
   tcase_add_test (tc, test_class_statement);
