@@ -60,6 +60,10 @@ TEST_EXPR (test_selector,               "$foo = $var ? { 1 => 'bam' }")
 TEST_EXPR (test_selector_default,       "$foo = $var ? { default => 'bam' }")
 TEST_EXPR (test_selector_two,           "$foo = $var ? { 1 => 'bam', default => 'boom' }")
 TEST_EXPR (test_selector_trail_comma,   "$foo = $var ? { 1 => 'bam', default => 'boom', }")
+TEST_EXPR (test_function,               "$foo = regsubst()")
+TEST_EXPR (test_function_arg,           "$foo = regsubst(1)")
+TEST_EXPR (test_function_args,          "$foo = regsubst(1,2)")
+TEST_EXPR (test_function_trail_comma,   "$foo = regsubst(1,2,)")
 
 /* Class definitions */
 TEST_EXPR (test_empty_class,            "class foo {}")
@@ -148,6 +152,10 @@ parse_suite (void)
   tcase_add_test (tc, test_selector_default);
   tcase_add_test (tc, test_selector_two);
   tcase_add_test (tc, test_selector_trail_comma);
+  tcase_add_test (tc, test_function);
+  tcase_add_test (tc, test_function_arg);
+  tcase_add_test (tc, test_function_args);
+  tcase_add_test (tc, test_function_trail_comma);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Node");

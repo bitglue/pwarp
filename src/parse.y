@@ -21,7 +21,7 @@
 %left '+' '-'
 %left '*' '/' '%'
 %left '!'
-%left '['
+%left '[' '('
 
 %error-verbose
 
@@ -88,6 +88,7 @@ expr:
     | array
     | hash
     | selector
+    | funccall
     | '(' expr ')'
     | '-' expr
     | expr '+' expr
@@ -137,6 +138,10 @@ selectorparams:
 selectorparam:
     expr ROCKET expr
     | DEFAULT ROCKET expr
+
+funccall:
+    NAME '(' ')'
+    | NAME '(' expressions endcomma ')'
 
 endcomma:
     /* empty */
