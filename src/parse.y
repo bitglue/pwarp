@@ -55,6 +55,7 @@ statement_or_declaration:
     | class
     | node
     | chain
+    | default
 
 resource:
     NAME '{' resourceinstances endsemi '}'
@@ -196,6 +197,10 @@ resourceref:
 edge:
     BEFORE
     | NOTIFY
+
+default:
+    RSCREF '{' params endcomma '}'
+    | RSCREF '{' '}'
 
 %%
 

@@ -66,6 +66,12 @@ TEST_EXPR (test_1param_class,           "class foo ($argument) {}")
 TEST_EXPR (test_default_param_class,    "class foo ($argument,$another='with default') {}")
 TEST_EXPR (test_param_trail_comma_class,"class foo ($many,$arguments,) {}")
 
+/* Resource defaults */
+TEST_EXPR (test_defaults_empty,         "Foo {}")
+TEST_EXPR (test_defaults,               "Foo { contrived => true }")
+TEST_EXPR (test_two_defaults,           "Foo { contrived => true, bees => 'buzz' }")
+TEST_EXPR (test_defaults_trail_comma,   "Foo { contrived => true, }")
+
 /* Chaining */
 TEST_EXPR (test_chain_require,          "Foo['foo'] -> Bar['bar']")
 TEST_EXPR (test_chain_notify,           "Foo['foo'] ~> Bar['bar']")
@@ -148,6 +154,13 @@ parse_suite (void)
   tcase_add_test (tc, test_1param_class);
   tcase_add_test (tc, test_default_param_class);
   tcase_add_test (tc, test_param_trail_comma_class);
+  suite_add_tcase (s, tc);
+
+  tc = tcase_create ("Default");
+  tcase_add_test (tc, test_defaults_empty);
+  tcase_add_test (tc, test_defaults);
+  tcase_add_test (tc, test_two_defaults);
+  tcase_add_test (tc, test_defaults_trail_comma);
   suite_add_tcase (s, tc);
 
   tc = tcase_create ("Chain");
