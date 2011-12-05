@@ -13,7 +13,7 @@
 %token BEFORE
 %token NOTIFY
 %token TRUE FALSE AND OR
-%token IN EQ LTE GT GTE NE
+%token IN EQ LTE GTE NE
 %token SPACESHIP_LEFT SPACESHIP_RIGHT
 
 %left OR
