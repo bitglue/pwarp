@@ -16,6 +16,7 @@
 %token IN EQ LTE GTE NE
 %token SPACESHIP_LEFT SPACESHIP_RIGHT
 
+%right '?'
 %left OR
 %left AND
 %left IN EQ '<' LTE '>' GTE NE
