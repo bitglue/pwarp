@@ -4,6 +4,7 @@ src/lex.c
 src/tinin
 src/parse.h
 src/parse.c
+src/parse.output
 src/libtinin.a
 .deps
 autom4te.cache

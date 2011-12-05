@@ -1,5 +1,5 @@
 BUILT_SOURCES = parse.h
-AM_YFLAGS = -d
+AM_YFLAGS = --report=state -d
 bin_PROGRAMS = tinin
 tinin_SOURCES = main.c lex.l parse.y
 noinst_LIBRARIES = libtinin.a
