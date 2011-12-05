@@ -93,6 +93,7 @@ expr:
     | selector
     | funccall
     | NAME /* bareword. should be deprecated. */
+    | resourceref
     | '(' expr ')'
     | '-' expr
     | expr '+' expr
